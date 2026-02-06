@@ -65,6 +65,10 @@ def fig_to_base64(fig):
 
 # ---------- ENDPOINTS ----------
 
+@app.get("/")
+def root():
+    return {"status": "ok"}
+
 @app.post("/statevectorplot")
 def statevector_endpoint(payload: CircuitPayload):
     # Build circuit
