@@ -7,7 +7,15 @@ from qiskit.circuit.library import UnitaryGate
 import matplotlib.pyplot as plt
 from qiskit_ibm_runtime import QiskitRuntimeService, Sampler
 from qiskit.visualization import plot_histogram
+from dotenv import load_dotenv
+import os
 
+load_dotenv()  # loads variables from .env
+
+IBM_TOKEN = os.getenv("IBM_TOKEN")
+
+if not IBM_TOKEN:
+    raise ValueError("IBM_TOKEN not found in environment variables")
 
 try:
     from qiskit_experiments.library import StateTomography
@@ -23,7 +31,7 @@ from qiskit_ibm_runtime import QiskitRuntimeService
 
 QiskitRuntimeService.save_account(
     channel="ibm_cloud",
-    token="5FGT3jlE_6bZLaY8cXGDRmPhoBHx9QUrHZILYfcZF8d2",
+    token=IBM_TOKEN,
     instance="open-instance",
     overwrite=True
 )
